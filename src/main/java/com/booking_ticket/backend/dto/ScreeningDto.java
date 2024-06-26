@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 public class ScreeningDto {
-
+    private Long id;
     private String day;
     private String dayOfWeek;
 

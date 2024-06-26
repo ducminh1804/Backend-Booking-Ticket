@@ -35,7 +35,7 @@ public class ScreeningController {
                         .stream()
                         .map(cur -> {
                             String s = String.valueOf(cur.getDay().getDayOfWeek());
-                            return new ScreeningDto(formatter.format(cur.getDay()), s);
+                            return new ScreeningDto(cur.getId(),formatter.format(cur.getDay()), s);
                         })
                         .collect(Collectors.toList());
         return new ResponseEntity<>(screeningDtos, HttpStatus.OK);

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TheaterScreeningDto {
+
     String getTheater_name();
 
     Time getStart_at();
