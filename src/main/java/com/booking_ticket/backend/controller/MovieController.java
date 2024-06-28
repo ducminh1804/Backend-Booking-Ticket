@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,18 +58,24 @@ public class MovieController {
                                               @RequestPart("movie") Movie movie,
                                               @RequestPart("image") MultipartFile file) throws IOException {
         Theater re = theaterService.findById(theaterId).orElseThrow(() -> new NotFoundException("Not found theater_id"));
-
-        Movie movie1 = new Movie();
-        BeanUtils.copyProperties(movie, movie1);
+        List<Theater> theaters = new ArrayList<>();
+        theaters.add(re);
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        movie1.setTheater(re);
-        movie1.setCreate_at(now);
-        movie1.setCreate_by(new UsernameCurrent().usernameCurrent);
-        movie1.setUrlImg(this.cloudinaryService.upLoadFile(file));
-        movieService.saveMovie(movie1);
-        return new ResponseEntity<>(movie1, HttpStatus.OK);
+        movie.setTheaters(theaters);
+        movie.setCreate_at(now);
+        movie.setCreate_by(new UsernameCurrent().usernameCurrent);
+        movie.setUrlImg(this.cloudinaryService.upLoadFile(file));
+
+        List<Movie> movies = new ArrayList<>();
+        movies.add(movie);
+        re.setMovies(movies);
+
+        movieService.saveMovie(movie);
+        return new ResponseEntity<>(movie, HttpStatus.OK);
+
+
     }
 
     @GetMapping("/movie/{movie_id}")

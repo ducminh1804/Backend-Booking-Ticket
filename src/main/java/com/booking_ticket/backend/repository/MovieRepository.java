@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
-    List<Movie> findByTheaterId(Long id);
+    List<Movie> findByTheatersId(Long id);
     List<Movie> findAll();
     Movie getById(Long id);
 }

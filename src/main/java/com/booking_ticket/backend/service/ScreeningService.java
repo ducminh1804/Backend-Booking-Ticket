@@ -1,13 +1,15 @@
 package com.booking_ticket.backend.service;
 
-import com.booking_ticket.backend.dto.TheaterScreeningDto;
+import com.booking_ticket.backend.dto.TheaterScheduleDto;
 import com.booking_ticket.backend.entity.Screening;
-import com.booking_ticket.backend.entity.Theater;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ScreeningService {
     List<Screening> getScreeningByMovieId(Long id);
 
-    List<TheaterScreeningDto> getTheaterByMovieIDAndScreeningId(Long movie_id, Long screening_id);
+    Map<String, Map<String, List<Map<String, Object>>>> getTheaterSchedules(Long movieId, Long screeningId);
+
+
 }

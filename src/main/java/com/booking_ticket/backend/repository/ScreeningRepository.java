@@ -1,5 +1,6 @@
 package com.booking_ticket.backend.repository;
 
+import com.booking_ticket.backend.dto.TheaterScheduleDto;
 import com.booking_ticket.backend.dto.TheaterScreeningDto;
 import com.booking_ticket.backend.entity.Screening;
 import com.booking_ticket.backend.entity.Theater;
@@ -18,11 +19,15 @@ public interface ScreeningRepository extends JpaRepository<Screening, Long> {
     @Query("select s from Screening s where s.movie.id = :id")
     List<Screening> getScreeningByMovieId(Long id);
 
-    @Query(value = "select t.theater_name,s.start_at from movie m " +
-            "join screening s on m.id = s.movie_id " +
-            "join theater t on t.id =  m.theater_id " +
-            "where m.id = :movie_id and s.id =:screening_id",
+
+    @Query(value = "SELECT t.id AS theater_id, t.theater_name, s.id AS screening_id, s.start_at " +
+            "FROM theater t " +
+            "JOIN theater_movie tm ON t.id = tm.theater_id " +
+            "JOIN movie m ON m.id = tm.movie_id " +
+            "JOIN screening s ON s.movie_id = m.id " +
+            "WHERE m.id = :movie_id AND s.id = :screening_id",
             nativeQuery = true)
-    List<TheaterScreeningDto> getTheaterByMovieIDAndScreeningId(@Param("movie_id") Long movie_id,
-                                                                @Param("screening_id") Long screening_id);
+    List<Object[]> getTheaterByMovieIDAndScreeningId(@Param("movie_id") Long movie_id,
+                                                     @Param("screening_id") Long screening_id);
+
 }

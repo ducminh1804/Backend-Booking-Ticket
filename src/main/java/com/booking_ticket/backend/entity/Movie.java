@@ -1,12 +1,12 @@
 package com.booking_ticket.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.booking_ticket.backend.entity.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -36,8 +36,9 @@ public class Movie extends SubEntity {
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<Seat> seats;
 
-    @ManyToOne
-    @JoinColumn(name = "theater_id")
-    @JsonIgnore
-    private Theater theater;
+    @ManyToMany(mappedBy = "movies", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnoreProperties("movies") // Loại bỏ thuộc tính movies trong Theater để tránh vòng lặp khi serialize JSON
+    private List<Theater> theaters;
+
+
 }

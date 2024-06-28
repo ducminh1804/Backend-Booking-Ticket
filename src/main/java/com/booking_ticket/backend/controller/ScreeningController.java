@@ -2,6 +2,7 @@ package com.booking_ticket.backend.controller;
 
 import com.booking_ticket.backend.dto.ScreeningDto;
 import com.booking_ticket.backend.dto.SeatCreateDto;
+import com.booking_ticket.backend.dto.TheaterScheduleDto;
 import com.booking_ticket.backend.dto.TheaterScreeningDto;
 import com.booking_ticket.backend.entity.Screening;
 import com.booking_ticket.backend.entity.Theater;
@@ -35,29 +36,34 @@ public class ScreeningController {
                         .stream()
                         .map(cur -> {
                             String s = String.valueOf(cur.getDay().getDayOfWeek());
-                            return new ScreeningDto(cur.getId(),formatter.format(cur.getDay()), s);
+                            return new ScreeningDto(cur.getId(), formatter.format(cur.getDay()), s);
                         })
                         .collect(Collectors.toList());
         return new ResponseEntity<>(screeningDtos, HttpStatus.OK);
     }
 
-    @GetMapping("/movie/{movie_id}/screening/{screening_id}/theater")
-    public ResponseEntity<Map<String, List<TheaterScreeningDto>>> getTheaterByMovieIDAndScreeningId(@PathVariable(value = "movie_id") Long movie_id,
-                                                                                                    @PathVariable(value = "screening_id") Long screening_id) {
-//        SimpleDateFormat inputFormat = new SimpleDateFormat("HH:mm:ss");
-        SimpleDateFormat formatTime = new SimpleDateFormat("hh:mm");
-
-        List<TheaterScreeningDto> theaters = screeningService.getTheaterByMovieIDAndScreeningId(movie_id, screening_id);
-        theaters.stream().map(cur -> formatTime.format(cur.getStart_at())).collect(Collectors.toList());
-        if (theaters.size() == 0) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-
-
-        Map<String, List<TheaterScreeningDto>> map = theaters.stream()
-                .collect(
-                        Collectors.groupingBy(TheaterScreeningDto::getTheater_name));
-        return new ResponseEntity<>(map, HttpStatus.OK);
+    //    @GetMapping("/movie/{movie_id}/screening/{screening_id}/theater")
+//    public ResponseEntity<Map<String, List<TheaterScreeningDto>>> getTheaterByMovieIDAndScreeningId(@PathVariable(value = "movie_id") Long movie_id,
+//                                                                                                    @PathVariable(value = "screening_id") Long screening_id) {
+////        SimpleDateFormat inputFormat = new SimpleDateFormat("HH:mm:ss");
+//        SimpleDateFormat formatTime = new SimpleDateFormat("hh:mm");
+//
+//        List<TheaterScreeningDto> theaters = screeningService.getTheaterByMovieIDAndScreeningId(movie_id, screening_id);
+//        theaters.stream().map(cur -> formatTime.format(cur.getStart_at())).collect(Collectors.toList());
+//        if (theaters.size() == 0) {
+//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//        }
+//
+//
+//        Map<String, List<TheaterScreeningDto>> map = theaters.stream()
+//                .collect(
+//                        Collectors.groupingBy(TheaterScreeningDto::getTheater_name));
+//        return new ResponseEntity<>(map, HttpStatus.OK);
+//    }
+    @GetMapping("movie/{movieId}/screenings/{screeningId}/theater")
+    public ResponseEntity<?> getTheaterSchedules(@PathVariable Long movieId, @PathVariable Long screeningId) {
+        Map<String, Map<String, List<Map<String, Object>>>> result = screeningService.getTheaterSchedules(movieId, screeningId);
+        return ResponseEntity.ok(result);
     }
 
 }

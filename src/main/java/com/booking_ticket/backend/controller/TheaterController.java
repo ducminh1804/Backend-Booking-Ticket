@@ -1,5 +1,6 @@
 package com.booking_ticket.backend.controller;
 
+import com.booking_ticket.backend.Exception.NotFoundException;
 import com.booking_ticket.backend.entity.Theater;
 import com.booking_ticket.backend.service.TheaterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,17 @@ public class TheaterController {
         return new ResponseEntity<>(theaters, HttpStatus.OK);
     }
 
-    @PostMapping("/theaters")
-    public ResponseEntity<?> createTheater(@RequestBody Theater theater) {
-        Theater theater1 = new Theater(theater.getProvince(), theater.getTheater_name(), theater.getNumber_of_screen());
-        Theater theater2 = theaterService.save(theater1);
-        return new ResponseEntity<>(theater2, HttpStatus.CREATED);
+    @GetMapping("theater/{theater_id}")
+    public ResponseEntity<Theater> getTheaterById(@PathVariable(value = "theater_id") Long theater_id) {
+        Theater theater = theaterService.findById(theater_id).orElseThrow(() -> new NotFoundException("Not found theater"));
+        return new ResponseEntity<>(theater, HttpStatus.OK);
     }
+//    @PostMapping("/theaters")
+//    public ResponseEntity<?> createTheater(@RequestBody Theater theater) {
+//        Theater theater1 = new Theater(theater.getProvince(), theater.getTheater_name(), theater.getNumber_of_screen());
+//        Theater theater2 = theaterService.save(theater1);
+//        return new ResponseEntity<>(theater2, HttpStatus.CREATED);
+//    }
 
 }
 

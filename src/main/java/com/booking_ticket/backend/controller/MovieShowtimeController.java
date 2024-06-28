@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -40,13 +41,14 @@ public class MovieShowtimeController {
                                               @RequestPart("screening") List<Screening> screening,
                                               @RequestPart("image") MultipartFile file) throws IOException {
         Theater re = theaterService.findById(theaterId).orElseThrow(() -> new NotFoundException("Not found theater_id"));
-
+        List<Theater> theaters = new ArrayList<>();
+        theaters.add(re);
         Movie movie1 = new Movie();
         BeanUtils.copyProperties(movie, movie1);
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        movie1.setTheater(re);
+        movie1.setTheaters(theaters);
         movie1.setCreate_at(now);
         movie1.setCreate_by(new UsernameCurrent().usernameCurrent);
         movie1.setUrlImg(this.cloudinaryService.upLoadFile(file));
