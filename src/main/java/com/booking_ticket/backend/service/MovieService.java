@@ -1,5 +1,6 @@
 package com.booking_ticket.backend.service;
 
+import com.booking_ticket.backend.dto.MovieReturnByScreening;
 import com.booking_ticket.backend.entity.Movie;
 import com.booking_ticket.backend.entity.Screening;
 
@@ -16,4 +17,6 @@ public interface MovieService {
 
 
     Movie createMovieSreenings(Movie movie, List<Screening> screening);
+
+    List<MovieReturnByScreening> getMovieByDate(int ngay, int thang);
 }

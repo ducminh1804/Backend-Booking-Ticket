@@ -2,6 +2,7 @@ package com.booking_ticket.backend.controller;
 
 import com.booking_ticket.backend.Exception.NotFoundException;
 import com.booking_ticket.backend.dto.MovieDto;
+import com.booking_ticket.backend.dto.MovieReturnByScreening;
 import com.booking_ticket.backend.entity.Movie;
 import com.booking_ticket.backend.entity.Screening;
 import com.booking_ticket.backend.entity.Theater;
@@ -12,6 +13,8 @@ import com.booking_ticket.backend.service.TheaterService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,5 +89,20 @@ public class MovieController {
         return new ResponseEntity<>(movieDto, HttpStatus.OK);
     }
 
+
+    @GetMapping("/movie")
+    public ResponseEntity<List<Movie>> getAllMovie() {
+        List<Movie> movieDtos = movieService.findAll();
+        return new ResponseEntity<>(movieDtos, HttpStatus.OK);
+    }
+
+    @GetMapping("/screening/{ngay}/{thang}")
+    public List<MovieReturnByScreening> getMoviesByDate(
+            @PathVariable("ngay") int ngay,
+            @PathVariable("thang") int thang
+    ) {
+//        return movieService.getMovieByDate(ngay, thang);
+        return movieService.getMovieByDate(ngay, thang);
+    }
 
 }

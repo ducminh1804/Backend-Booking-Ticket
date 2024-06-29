@@ -1,5 +1,6 @@
 package com.booking_ticket.backend.service.Impl;
 
+import com.booking_ticket.backend.dto.MovieReturnByScreening;
 import com.booking_ticket.backend.entity.Movie;
 import com.booking_ticket.backend.entity.Screening;
 import com.booking_ticket.backend.repository.MovieRepository;
@@ -58,6 +59,11 @@ public class MovieServiceImpl implements MovieService {
         }
 //        movie.setScreenings(screenings);
         return movieRepository.save(movie);
+    }
+
+    @Override
+    public List<MovieReturnByScreening> getMovieByDate(int ngay, int thang) {
+        return movieRepository.findMoviesByDate(ngay,thang);
     }
 
 
