@@ -19,6 +19,7 @@ public class Theater extends BaseEntity {
     private String province;
     private String theater_name;
     private int numberOfScreen;
+    private String url;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(

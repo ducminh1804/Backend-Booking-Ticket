@@ -13,6 +13,7 @@ C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\DatabaseInitiali
 C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\dto\CalendarScheduleDto.java
 C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\dto\LoginDto.java
 C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\dto\MovieDto.java
+C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\dto\MovieReturnByScreening.java
 C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\dto\RegisterDto.java
 C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\dto\RoomDto.java
 C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\dto\ScheduleDto.java

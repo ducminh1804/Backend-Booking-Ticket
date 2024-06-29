@@ -1,4 +1,5 @@
 com\booking_ticket\backend\repository\UserRepository.class
+com\booking_ticket\backend\dto\MovieReturnByScreening.class
 com\booking_ticket\backend\repository\ScreeningRepository.class
 com\booking_ticket\backend\controller\TicketController.class
 com\booking_ticket\backend\dto\TicketCreateDto.class
