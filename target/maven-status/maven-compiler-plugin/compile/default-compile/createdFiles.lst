@@ -14,6 +14,7 @@ com\booking_ticket\backend\entity\UsernameCurrent.class
 com\booking_ticket\backend\service\RoomService.class
 com\booking_ticket\backend\service\TheaterService.class
 com\booking_ticket\backend\dto\ScreeningDto.class
+com\booking_ticket\backend\dto\MovieMapDto.class
 com\booking_ticket\backend\repository\TheaterRepository.class
 com\booking_ticket\backend\service\Impl\TheaterServiceImpl.class
 com\booking_ticket\backend\entity\Screening.class
@@ -34,6 +35,7 @@ com\booking_ticket\backend\dto\MovieDto.class
 com\booking_ticket\backend\entity\Room.class
 com\booking_ticket\backend\service\Impl\ScreeningServiceImpl.class
 com\booking_ticket\backend\repository\RoomRepository.class
+com\booking_ticket\backend\dto\MovieMapSubDto.class
 com\booking_ticket\backend\repository\SeatRepository.class
 com\booking_ticket\backend\security\SecurityConfig.class
 com\booking_ticket\backend\entity\SubEntity.class
@@ -58,6 +60,7 @@ com\booking_ticket\backend\controller\CalendarScheduleController.class
 com\booking_ticket\backend\entity\BaseEntity.class
 com\booking_ticket\backend\controller\RoomController.class
 com\booking_ticket\backend\payload\response\JwtResponse.class
+com\booking_ticket\backend\dto\MovieReturnDto.class
 com\booking_ticket\backend\repository\RoleRepository.class
 com\booking_ticket\backend\controller\Upload.class
 com\booking_ticket\backend\security\jwt\AuthTokenFilter.class

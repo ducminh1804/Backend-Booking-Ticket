@@ -1,8 +1,7 @@
 package com.booking_ticket.backend.controller;
 
 import com.booking_ticket.backend.Exception.NotFoundException;
-import com.booking_ticket.backend.dto.MovieDto;
-import com.booking_ticket.backend.dto.MovieReturnByScreening;
+import com.booking_ticket.backend.dto.*;
 import com.booking_ticket.backend.entity.Movie;
 import com.booking_ticket.backend.entity.Screening;
 import com.booking_ticket.backend.entity.Theater;
@@ -25,9 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -96,13 +93,60 @@ public class MovieController {
         return new ResponseEntity<>(movieDtos, HttpStatus.OK);
     }
 
-    @GetMapping("/screening/{ngay}/{thang}")
-    public List<MovieReturnByScreening> getMoviesByDate(
+    @GetMapping("/screeningg/{ngay}/{thang}")
+    public List<MovieReturnByScreening> getMoviesByDatee(
             @PathVariable("ngay") int ngay,
             @PathVariable("thang") int thang
     ) {
 //        return movieService.getMovieByDate(ngay, thang);
         return movieService.getMovieByDate(ngay, thang);
     }
+
+//                .map(movie -> modelMapper.map(movie, MovieDto.class))
+
+    @GetMapping("/screening/{ngay}/{thang}")
+    public ResponseEntity<?> getMoviesByDate(
+            @PathVariable("ngay") int ngay,
+            @PathVariable("thang") int thang
+    ) {
+        List<MovieReturnByScreening> movies = movieService.getMovieByDate(ngay, thang);
+
+        // Group movies by theater name and map to info and time
+        Map<String, Map<String, Object>> map = movies.stream()
+                .collect(Collectors.groupingBy(
+                        MovieReturnByScreening::getMovie_name,
+                        Collectors.collectingAndThen(
+                                Collectors.toMap(
+                                        MovieReturnByScreening::getMovie_name, // Key mapper
+                                        movie -> {
+                                            Map<String, Object> movieInfo = new HashMap<>();
+                                            movieInfo.put("movie_name", movie.getMovie_name());
+                                            movieInfo.put("category", movie.getCategory());
+                                            movieInfo.put("urlImg", movie.getUrlImg());
+                                            return movieInfo;
+                                        },
+                                        (existing, replacement) -> existing // Merge function (in case of duplicate keys)
+                                ),
+                                movieMap -> {
+                                    Map<String, Object> result = new HashMap<>();
+                                    result.put("info", movieMap.values().iterator().next()); // Get the first movie info
+                                    result.put("time", movieMap.keySet().stream()
+                                            .flatMap(key -> movies.stream()
+                                                    .filter(movie -> movie.getMovie_name().equals(key))
+                                                    .map(MovieReturnByScreening::getStart_at)
+                                            )
+                                            .collect(Collectors.toList()));
+                                    return result;
+                                }
+                        )
+                ));
+
+        return ResponseEntity.ok(map);
+    }
+
+
+
+
+
 
 }
