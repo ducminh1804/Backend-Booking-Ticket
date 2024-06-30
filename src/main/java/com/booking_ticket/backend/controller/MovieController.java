@@ -105,13 +105,13 @@ public class MovieController {
 //                .map(movie -> modelMapper.map(movie, MovieDto.class))
 
     @GetMapping("/screening/{ngay}/{thang}")
-    public ResponseEntity<?> getMoviesByDate(
+    public ResponseEntity<List<Map<String, Object>>> getMoviesByDate(
             @PathVariable("ngay") int ngay,
             @PathVariable("thang") int thang
     ) {
         List<MovieReturnByScreening> movies = movieService.getMovieByDate(ngay, thang);
 
-        // Group movies by theater name and map to info and time
+        // Group movies by movie name and map to info and time
         Map<String, Map<String, Object>> map = movies.stream()
                 .collect(Collectors.groupingBy(
                         MovieReturnByScreening::getMovie_name,
@@ -120,6 +120,7 @@ public class MovieController {
                                         MovieReturnByScreening::getMovie_name, // Key mapper
                                         movie -> {
                                             Map<String, Object> movieInfo = new HashMap<>();
+                                            movieInfo.put("id", movie.getId());
                                             movieInfo.put("movie_name", movie.getMovie_name());
                                             movieInfo.put("category", movie.getCategory());
                                             movieInfo.put("urlImg", movie.getUrlImg());
@@ -141,11 +142,48 @@ public class MovieController {
                         )
                 ));
 
-        return ResponseEntity.ok(map);
+        // Convert map to list
+        List<Map<String, Object>> resultList = map.entrySet().stream()
+                .map(entry -> {
+                    Map<String, Object> resultMap = new HashMap<>();
+                    resultMap.put("movie_name", entry.getKey());
+                    resultMap.putAll(entry.getValue());
+                    return resultMap;
+                })
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(resultList);
     }
 
+    @GetMapping("/screening/{ngay}/{thang}/{movie_id}")
+    public ResponseEntity<Map<String, Object>> getMoviesByDate(
+            @PathVariable("ngay") int ngay,
+            @PathVariable("thang") int thang,
+            @PathVariable("movie_id") Long movie_id
+    ) {
+        List<MovieReturnByScreening> movies = movieService.findMoviesByDateMovieId(ngay, thang, movie_id);
 
+        if (movies.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
 
+        // Assuming the query returns only one movie
+        MovieReturnByScreening movie = movies.get(0);
+
+        Map<String, Object> info = new HashMap<>();
+        info.put("id", movie.getId());
+        info.put("movie_name", movie.getMovie_name());
+        info.put("category", movie.getCategory());
+        info.put("urlImg", movie.getUrlImg());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("info", info);
+        response.put("time", movies.stream()
+                .map(MovieReturnByScreening::getStart_at)
+                .collect(Collectors.toList()));
+
+        return ResponseEntity.ok(response);
+    }
 
 
 

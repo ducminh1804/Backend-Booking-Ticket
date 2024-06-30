@@ -17,4 +17,6 @@ public interface SeatService {
     boolean existsRoomId(Long id);
 
     void createSeat(SeatCreateDto seatCreateDto);
+
+    List<Seat> findAll();
 }

@@ -46,5 +46,10 @@ public class SeatServiceImpl implements SeatService {
         seatRepository.createSeat(seatCreateDto);
     }
 
+    @Override
+    public List<Seat> findAll() {
+        return seatRepository.findAll();
+    }
+
 
 }

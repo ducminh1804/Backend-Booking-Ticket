@@ -7,7 +7,7 @@ import java.sql.Time;
 import java.time.LocalDateTime;
 
 public interface MovieReturnByScreening {
-
+    public Long getId();
     public String getMovie_name();
 
     public String getCategory();

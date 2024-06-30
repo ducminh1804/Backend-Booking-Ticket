@@ -16,14 +16,26 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
     List<Movie> findByTheatersId(Long id);
+
     List<Movie> findAll();
+
     Movie getById(Long id);
 
 
-    @Query(value = "SELECT m.movie_name, m.category, m.url_img, s.start_at " +
+    @Query(value = "SELECT m.id,m.movie_name, m.category, m.url_img, s.start_at " +
             "FROM screening s " +
             "JOIN movie m ON m.id = s.movie_id " +
             "WHERE s.ngay = :ngay AND s.thang = :thang", nativeQuery = true)
     List<MovieReturnByScreening> findMoviesByDate(@Param("ngay") int ngay, @Param("thang") int thang);
+
+
+    @Query(value = "SELECT m.id, m.movie_name, m.category, m.url_img, s.start_at " +
+            "FROM screening s " +
+            "JOIN movie m ON m.id = s.movie_id " +
+            "WHERE s.ngay = :ngay AND s.thang = :thang AND m.id = :movie_id", nativeQuery = true)
+    List<MovieReturnByScreening> findMoviesByDateMovieId(@Param("ngay") int ngay, @Param("thang") int thang,
+                                                         @Param("movie_id") Long id);
+
+
 
 }

@@ -19,4 +19,6 @@ public interface MovieService {
     Movie createMovieSreenings(Movie movie, List<Screening> screening);
 
     List<MovieReturnByScreening> getMovieByDate(int ngay, int thang);
+
+    List<MovieReturnByScreening> findMoviesByDateMovieId(int ngay, int thang, Long id);
 }

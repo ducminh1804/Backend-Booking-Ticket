@@ -66,5 +66,10 @@ public class MovieServiceImpl implements MovieService {
         return movieRepository.findMoviesByDate(ngay,thang);
     }
 
+    @Override
+    public List<MovieReturnByScreening> findMoviesByDateMovieId(int ngay, int thang, Long id) {
+        return movieRepository.findMoviesByDateMovieId(ngay,thang,id);
+    }
+
 
 }

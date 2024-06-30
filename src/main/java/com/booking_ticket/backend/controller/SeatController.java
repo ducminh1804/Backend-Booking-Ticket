@@ -3,7 +3,7 @@ package com.booking_ticket.backend.controller;
 import com.booking_ticket.backend.dto.RoomDto;
 import com.booking_ticket.backend.dto.SeatCreateDto;
 import com.booking_ticket.backend.dto.SeatDto;
-import com.booking_ticket.backend.entity.Seat;
+import com.booking_ticket.backend.dto.SeatReturnDto;
 import com.booking_ticket.backend.service.RoomService;
 import com.booking_ticket.backend.service.SeatService;
 import org.modelmapper.ModelMapper;
@@ -45,5 +45,14 @@ public class SeatController {
         seatCreateDto.setRoom_id(idRooms.get(0));
         seatService.createSeat(seatCreateDto);
         return new ResponseEntity<>(seatCreateDto, HttpStatus.OK);
+    }
+
+    @GetMapping("/seats")
+    public ResponseEntity<List<SeatReturnDto>> findAll() {
+        List<SeatReturnDto> seats = seatService.findAll()
+                .stream()
+                .map(cur -> modelMapper.map(cur, SeatReturnDto.class))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(seats);
     }
 }

@@ -22,4 +22,7 @@ public interface SeatRepository extends JpaRepository<Seat, Long> {
             ":#{#dto.room_id}, :#{#dto.screening_id}, :#{#dto.user_id}, :#{#dto.movie_id})",
             nativeQuery = true)
     void createSeat(@Param("dto") SeatCreateDto dto);
+
+    List<Seat> findAll();
+
 }
