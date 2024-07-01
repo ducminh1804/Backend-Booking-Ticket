@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -134,7 +136,7 @@ public class MovieController {
                                     result.put("time", movieMap.keySet().stream()
                                             .flatMap(key -> movies.stream()
                                                     .filter(movie -> movie.getMovie_name().equals(key))
-                                                    .map(MovieReturnByScreening::getStart_at)
+                                                    .map(movie -> formatTime(movie.getStart_at())) // Use formatTime here
                                             )
                                             .collect(Collectors.toList()));
                                     return result;
@@ -179,12 +181,16 @@ public class MovieController {
         Map<String, Object> response = new HashMap<>();
         response.put("info", info);
         response.put("time", movies.stream()
-                .map(MovieReturnByScreening::getStart_at)
+                .map(m -> formatTime(m.getStart_at()))
                 .collect(Collectors.toList()));
 
         return ResponseEntity.ok(response);
     }
 
 
+    public String formatTime(Time time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        return sdf.format(time);
+    }
 
 }

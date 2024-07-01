@@ -61,6 +61,7 @@ com\booking_ticket\backend\entity\BaseEntity.class
 com\booking_ticket\backend\controller\RoomController.class
 com\booking_ticket\backend\payload\response\JwtResponse.class
 com\booking_ticket\backend\dto\MovieReturnDto.class
+com\booking_ticket\backend\dto\SeatReturnDto.class
 com\booking_ticket\backend\repository\RoleRepository.class
 com\booking_ticket\backend\controller\Upload.class
 com\booking_ticket\backend\security\jwt\AuthTokenFilter.class

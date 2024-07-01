@@ -23,6 +23,7 @@ C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\dto\ScheduleDto.
 C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\dto\ScreeningDto.java
 C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\dto\SeatCreateDto.java
 C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\dto\SeatDto.java
+C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\dto\SeatReturnDto.java
 C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\dto\TheaterScheduleDto.java
 C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\dto\TheaterScreeningDto.java
 C:\Users\voduc\backend\src\main\java\com\booking_ticket\backend\dto\TicketCreateDto.java
