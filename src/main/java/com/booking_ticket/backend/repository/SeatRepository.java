@@ -1,6 +1,7 @@
 package com.booking_ticket.backend.repository;
 
 import com.booking_ticket.backend.dto.SeatCreateDto;
+import com.booking_ticket.backend.dto.SeatReturnDto;
 import com.booking_ticket.backend.entity.Seat;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,5 +25,8 @@ public interface SeatRepository extends JpaRepository<Seat, Long> {
     void createSeat(@Param("dto") SeatCreateDto dto);
 
     List<Seat> findAll();
+
+    @Query("SELECT new com.booking_ticket.backend.dto.SeatReturnDto(s.id, s.seat_name, s.state) FROM Seat s")
+    List<SeatReturnDto> getAllSeats();
 
 }

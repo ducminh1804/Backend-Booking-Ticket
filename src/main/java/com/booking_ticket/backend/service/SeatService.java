@@ -1,6 +1,7 @@
 package com.booking_ticket.backend.service;
 
 import com.booking_ticket.backend.dto.SeatCreateDto;
+import com.booking_ticket.backend.dto.SeatReturnDto;
 import com.booking_ticket.backend.entity.Room;
 import com.booking_ticket.backend.entity.Seat;
 
@@ -19,4 +20,6 @@ public interface SeatService {
     void createSeat(SeatCreateDto seatCreateDto);
 
     List<Seat> findAll();
+
+    List<SeatReturnDto> getAllSeats();
 }

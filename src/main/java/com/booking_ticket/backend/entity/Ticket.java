@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Time;
 import java.util.List;
 
 @Entity
@@ -44,4 +45,7 @@ public class Ticket extends SubEntity {
     @JsonIgnore
     private Screening screening;
 
+    private int ngay;
+    private int thang;
+    private Time start_at;
 }

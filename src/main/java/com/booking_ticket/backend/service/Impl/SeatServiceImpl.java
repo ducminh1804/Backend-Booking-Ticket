@@ -1,6 +1,7 @@
 package com.booking_ticket.backend.service.Impl;
 
 import com.booking_ticket.backend.dto.SeatCreateDto;
+import com.booking_ticket.backend.dto.SeatReturnDto;
 import com.booking_ticket.backend.entity.Room;
 import com.booking_ticket.backend.entity.Seat;
 import com.booking_ticket.backend.repository.SeatRepository;
@@ -49,6 +50,11 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public List<Seat> findAll() {
         return seatRepository.findAll();
+    }
+
+    @Override
+    public List<SeatReturnDto> getAllSeats() {
+        return seatRepository.getAllSeats();
     }
 
 

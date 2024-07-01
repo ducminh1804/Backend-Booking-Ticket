@@ -47,12 +47,22 @@ public class SeatController {
         return new ResponseEntity<>(seatCreateDto, HttpStatus.OK);
     }
 
+//    @GetMapping("/seats")
+//    public ResponseEntity<List<SeatReturnDto>> findAll() {
+//        List<SeatReturnDto> seats = seatService.findAll()
+//                .stream()
+//                .map(cur -> modelMapper.map(cur, SeatReturnDto.class))
+//                .collect(Collectors.toList());
+//        return ResponseEntity.ok(seats);
+//    }
+
     @GetMapping("/seats")
-    public ResponseEntity<List<SeatReturnDto>> findAll() {
-        List<SeatReturnDto> seats = seatService.findAll()
+    public ResponseEntity<List<SeatReturnDto>> getAllSeats() {
+        List<SeatReturnDto> seatReturnDtos = seatService.getAllSeats()
                 .stream()
                 .map(cur -> modelMapper.map(cur, SeatReturnDto.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(seats);
+
+        return new ResponseEntity<>(seatReturnDtos, HttpStatus.OK);
     }
 }
