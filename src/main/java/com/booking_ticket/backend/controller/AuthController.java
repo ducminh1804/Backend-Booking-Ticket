@@ -3,6 +3,7 @@ package com.booking_ticket.backend.controller;
 import com.booking_ticket.backend.dto.LoginDto;
 import com.booking_ticket.backend.dto.RegisterDto;
 import com.booking_ticket.backend.payload.response.JwtResponse;
+import com.booking_ticket.backend.repository.UserRepository;
 import com.booking_ticket.backend.security.jwt.JwtUtils;
 import com.booking_ticket.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ import java.util.stream.Collectors;
 public class AuthController {
 
     @Autowired
+    UserRepository userRepository;
+    @Autowired
     UserService userService;
     @Autowired
     AuthenticationManager authenticationManager;
@@ -40,7 +43,10 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
+//
+        Long userId = userRepository.findIdByUsername(loginDto.getUsername());
 
+//
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
@@ -49,7 +55,8 @@ public class AuthController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), roles));
+//        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), roles,userId));
+        return  ResponseEntity.ok(new JwtResponse(jwt, userId, userDetails.getUsername(), roles));
     }
 
     @GetMapping("/free")

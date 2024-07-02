@@ -8,4 +8,6 @@ import org.springframework.stereotype.Service;
 
 public interface UserService {
     void save(RegisterDto registerDto);
+
+    String findIdByUsername(String username);
 }

@@ -1,16 +1,19 @@
 package com.booking_ticket.backend.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 
 @MappedSuperclass
 @Data
 public class SubEntity extends BaseEntity{
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime create_at;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime modified_at;
     private String create_by;
     private String modified_by;

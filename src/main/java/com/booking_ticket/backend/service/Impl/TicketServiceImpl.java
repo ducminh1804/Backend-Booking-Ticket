@@ -2,6 +2,7 @@ package com.booking_ticket.backend.service.Impl;
 
 import com.booking_ticket.backend.dto.TicketCreateDto;
 import com.booking_ticket.backend.dto.TicketDto;
+import com.booking_ticket.backend.entity.Ticket;
 import com.booking_ticket.backend.repository.TicketRepository;
 import com.booking_ticket.backend.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public List<TicketDto> getTicketByUserId(Long id) {
         return ticketRepository.getTicketByUserId(id);
+    }
+
+    @Override
+    public Ticket save(Ticket ticket) {
+        return ticketRepository.save(ticket);
     }
 
     @Override

@@ -20,10 +20,6 @@ public class Ticket extends SubEntity {
     @JsonIgnore
     private List<Seat> seats;
 
-    @ManyToOne
-    @JoinColumn(name = "combo_id")
-    @JsonIgnore
-    private Combo combo;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -40,12 +36,21 @@ public class Ticket extends SubEntity {
     @JsonIgnore
     private Room room;
 
+
+    @ManyToOne
+    @JoinColumn(name = "combo_id")
+    @JsonIgnore
+    private Combo combo;
+
     @ManyToOne
     @JoinColumn(name = "screening_id")
     @JsonIgnore
     private Screening screening;
 
     private int ngay;
+    private String start_at;
     private int thang;
-    private Time start_at;
+    private String combo_name;
+    private  String seat;
+    private Float total_price;
 }

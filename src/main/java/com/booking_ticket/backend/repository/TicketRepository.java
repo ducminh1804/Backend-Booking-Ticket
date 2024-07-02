@@ -17,6 +17,7 @@ import java.util.List;
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
+    public Ticket save(Ticket ticket);
 
     @Query(value = "select th.theater_name,u.username,  sc.day, sc.start_at,m.movie_name, r.room_name, s.seat_name,c.name " +
             "from ticket t " +
@@ -46,8 +47,8 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "insert into ticket( user_id,movie_id ,room_id,combo_id,screening_id) " +
-            "values (:#{#dto.user_id},:#{#dto.movie_id},:#{#dto.room_id},:#{#dto.combo_id},:#{#dto.screening_id})",
+    @Query(value = "insert into ticket( user_id,movie_id ,room_id,combo_id,screening_id,ngay,start_at,thang,combo_name,seat,total_price) " +
+            "values (:#{#dto.user_id},:#{#dto.movie_id},:#{#dto.room_id},:#{#dto.combo_id},:#{#dto.screening_id},:#{#dto.ngay},:#{#dto.start_at},:#{#dto.thang},:#{#dto.combo_name},:#{#dto.seat},:#{#dto.total_price})",
             nativeQuery = true)
     void createTicket(@Param("dto") TicketCreateDto dto);
 }

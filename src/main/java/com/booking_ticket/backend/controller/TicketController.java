@@ -3,6 +3,7 @@ package com.booking_ticket.backend.controller;
 import com.booking_ticket.backend.dto.RoomDto;
 import com.booking_ticket.backend.dto.TicketCreateDto;
 import com.booking_ticket.backend.dto.TicketDto;
+import com.booking_ticket.backend.entity.Ticket;
 import com.booking_ticket.backend.repository.TicketRepository;
 import com.booking_ticket.backend.service.RoomService;
 import com.booking_ticket.backend.service.TicketService;
@@ -26,6 +27,8 @@ public class TicketController {
     @Autowired
     RoomService roomService;
 
+
+
     @GetMapping("/ticket/{ticket_id}")
     public ResponseEntity<List<TicketDto>> findByTicketId(@PathVariable(value = "ticket_id") Long ticket_id) {
         List<TicketDto> ticket = ticketService.getTicketByTicketId(ticket_id);
@@ -42,9 +45,20 @@ public class TicketController {
     public ResponseEntity<TicketCreateDto> createTicket(@RequestBody TicketCreateDto ticketCreateDto) {
         List<RoomDto> roomsIsValid = roomService.findRoomIsValid();
         List<Long> idRooms = roomsIsValid.stream().map(cur -> cur.getId()).collect(Collectors.toList());
-        ticketCreateDto.setRoom_id(idRooms.get(0));
+//        ticketCreateDto.setRoom_id(idRooms.get(0));
+        ticketCreateDto.setRoom_id(1l);
+
         ticketService.createTicket(ticketCreateDto);
         return new ResponseEntity<>(ticketCreateDto, HttpStatus.CREATED);
+    }
+
+
+    @PostMapping("/createticket")
+    public ResponseEntity<Ticket> save(@RequestBody Ticket ticket) {
+        ticket.setCombo(null);
+        Ticket re = ticketService.save(ticket);
+
+        return ResponseEntity.ok(re);
     }
 
 }

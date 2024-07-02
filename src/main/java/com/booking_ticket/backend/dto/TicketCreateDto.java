@@ -13,4 +13,10 @@ public class TicketCreateDto {
     private Long room_id;
     private Long combo_id;
     private Long screening_id;
+    private int ngay;
+    private String start_at;
+    private int thang;
+    private String combo_name;
+    private String seat;
+    private float total_price;
 }

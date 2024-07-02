@@ -35,4 +35,14 @@ public class UserServiceImpl implements UserService {
         user.setRole(Collections.singletonList(defaultRole));
         userRepository.save(user);
     }
+
+    @Override
+    public String findIdByUsername(String username) {
+        return null;
+    }
+
+//    @Override
+//    public String findIdByUsername(String username) {
+//        return userRepository.findIdByUsername(username);
+//    }
 }
