@@ -7,6 +7,7 @@ import com.booking_ticket.backend.entity.Seat;
 import com.booking_ticket.backend.repository.SeatRepository;
 import com.booking_ticket.backend.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,6 +56,11 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public List<SeatReturnDto> getAllSeats() {
         return seatRepository.getAllSeats();
+    }
+
+    @Override
+    public void updateSeat(List<String> seat_name) {
+         seatRepository.updateSeats(seat_name);
     }
 
 

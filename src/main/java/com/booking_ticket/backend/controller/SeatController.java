@@ -65,4 +65,11 @@ public class SeatController {
 
         return new ResponseEntity<>(seatReturnDtos, HttpStatus.OK);
     }
+
+
+    @PutMapping("/update")
+    public ResponseEntity<List<String>> updateSeat(@RequestBody List<String> seat_names) {
+        seatService.updateSeat(seat_names);
+        return ResponseEntity.ok(seat_names);
+    }
 }

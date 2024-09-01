@@ -28,7 +28,6 @@ public class TicketController {
     RoomService roomService;
 
 
-
     @GetMapping("/ticket/{ticket_id}")
     public ResponseEntity<List<TicketDto>> findByTicketId(@PathVariable(value = "ticket_id") Long ticket_id) {
         List<TicketDto> ticket = ticketService.getTicketByTicketId(ticket_id);
@@ -41,6 +40,7 @@ public class TicketController {
         return new ResponseEntity<>(ticket, HttpStatus.OK);
     }
 
+//cai nay bbo, dung cai tren
     @PostMapping("/addTicket")
     public ResponseEntity<TicketCreateDto> createTicket(@RequestBody TicketCreateDto ticketCreateDto) {
         List<RoomDto> roomsIsValid = roomService.findRoomIsValid();
@@ -59,6 +59,11 @@ public class TicketController {
         Ticket re = ticketService.save(ticket);
 
         return ResponseEntity.ok(re);
+    }
+
+    @GetMapping("/testt")
+    public String test() {
+        return "test with token";
     }
 
 }

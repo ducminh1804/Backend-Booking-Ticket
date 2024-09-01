@@ -19,6 +19,7 @@ public class ScreeningServiceImpl implements ScreeningService {
     ScreeningRepository screeningRepository;
     @Override
     public List<Screening> getScreeningByMovieId(Long id) {
+//        return screeningRepository.getScreeningByMovieId(id);
         return screeningRepository.getScreeningByMovieId(id);
     }
 

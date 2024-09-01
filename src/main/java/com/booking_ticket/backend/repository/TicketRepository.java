@@ -51,4 +51,6 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
             "values (:#{#dto.user_id},:#{#dto.movie_id},:#{#dto.room_id},:#{#dto.combo_id},:#{#dto.screening_id},:#{#dto.ngay},:#{#dto.start_at},:#{#dto.thang},:#{#dto.combo_name},:#{#dto.seat},:#{#dto.total_price})",
             nativeQuery = true)
     void createTicket(@Param("dto") TicketCreateDto dto);
+
+
 }

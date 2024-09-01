@@ -51,6 +51,6 @@ public class Ticket extends SubEntity {
     private String start_at;
     private int thang;
     private String combo_name;
-    private  String seat;
+    private String seat;
     private Float total_price;
 }

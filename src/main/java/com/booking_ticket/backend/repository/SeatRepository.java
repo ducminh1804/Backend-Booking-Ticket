@@ -29,4 +29,11 @@ public interface SeatRepository extends JpaRepository<Seat, Long> {
     @Query("SELECT new com.booking_ticket.backend.dto.SeatReturnDto(s.id, s.seat_name, s.state) FROM Seat s")
     List<SeatReturnDto> getAllSeats();
 
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE seat s SET s.state = 1 WHERE s.seat_name IN :seatNames", nativeQuery = true)
+    void updateSeats(@Param("seatNames") List<String> seatNames);
+
 }

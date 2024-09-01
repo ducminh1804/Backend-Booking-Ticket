@@ -52,13 +52,33 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http.csrf(csrf -> csrf.disable())
+//                .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .authorizeHttpRequests(auth ->
+//                        auth.requestMatchers("/api/**").permitAll()
+//                                .requestMatchers("/api/testt").hasRole("ADMIN")
+////                                .anyRequest().authenticated()
+//                );
+//
+//        http.authenticationProvider(authenticationProvider());
+//
+//        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+//
+//        return http.build();
+//    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/api/**").permitAll()
+                .authorizeHttpRequests(auth -> auth
+                                .requestMatchers("/api/addTicket").hasAnyAuthority("ADMIN","USER")
+                                .requestMatchers("/api/**").permitAll()
+                                .anyRequest().authenticated()
 //                                .anyRequest().authenticated()
                 );
 
@@ -68,4 +88,6 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+
 }

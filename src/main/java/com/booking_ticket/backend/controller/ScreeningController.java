@@ -28,7 +28,10 @@ public class ScreeningController {
 
     @GetMapping("/movie/{movie_id}/screening")
     public ResponseEntity<List<ScreeningDto>> getScreeningByMovieId(@PathVariable(value = "movie_id") Long movie_id) {
+
         List<Screening> screenings = screeningService.getScreeningByMovieId(movie_id);
+
+
         Calendar c = Calendar.getInstance();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM");
         List<ScreeningDto> screeningDtos =
