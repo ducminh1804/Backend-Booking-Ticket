@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  mysql-container:
+    container_name: mysql-container
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: booking_ticket
+    networks:
+      spring-net:
+
+  springboot-restful-webservices:
+    container_name: springboot-restful-webservices
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mysql-container
+    networks:
+      springboot-mysql-net:
+    restart: on-failure
+
+networks:
+  spring-net:
