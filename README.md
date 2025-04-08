@@ -1,3 +1,4 @@
+### Link Frontend: https://github.com/ducminh1804/App-Booking-Ticket
 # 🎟️ Booking Ticket Backend
 
 Hệ thống backend cho nền tảng đặt vé xem phim trực tuyến, xây dựng với kiến trúc rõ ràng, dễ mở rộng và áp dụng các công nghệ thực tế.
