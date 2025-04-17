@@ -1,39 +1,56 @@
-### Link Frontend: https://github.com/ducminh1804/App-Booking-Ticket
+### Link Frontend: [App-Booking-Ticket](https://github.com/ducminh1804/App-Booking-Ticket)
+
 # 🎟️ Booking Ticket Backend
 
-**Hệ thống backend cho nền tảng đặt vé xem phim trực tuyến, xây dựng với kiến trúc rõ ràng, dễ mở rộng và áp dụng các công nghệ thực tế. Ngoài các chức năng cơ bản như đặt vé, quản lý phim – lịch chiếu – phòng chiếu, hệ thống còn áp dụng JWT cho xác thực người dùng, sử dụng Cloudinary để lưu trữ media, và đóng gói bằng Docker để triển khai thuận tiện hơn. Dự án đã được triển khai thực tế trên máy chủ AWS EC2.**
+**A backend system for an online movie ticket booking platform, built with a clear and scalable architecture using real-world technologies. In addition to basic functionalities such as ticket booking, managing movies, showtimes, and theaters, the system implements JWT for user authentication, uses Cloudinary for media storage, and is containerized with Docker for easier deployment. The project is deployed on an AWS EC2 server.**
 
 ---
 
-## 🚀 Công Nghệ Sử Dụng
+## 📑 Table of Contents
 
-| Công nghệ                      | Mục đích                                                                 |
-|-------------------------------|--------------------------------------------------------------------------|
-| **Java 17**                   | Ngôn ngữ lập trình chính                                                 |
-| **Spring Boot**               | Framework cốt lõi                                                        |
-| **Spring Security + JWT**     | Xác thực & phân quyền người dùng                                        |
-| **Spring Data JPA (Hibernate)** | ORM quản lý dữ liệu                                                     |
-| **MySQL**                     | Cơ sở dữ liệu quan hệ chính                                              |
-| **Cloudinary API**            | Lưu trữ và xử lý ảnh                                                     |
-| **Docker**                    | Đóng gói & triển khai ứng dụng dễ dàng hơn                              |
-| **AWS EC2**                   | Triển khai ứng dụng backend thực tế                                     |
+1. [🚀 Technologies Used](#-technologies-used)
+2. [✨ Features](#-features)
+3. [🔧 Installation & Running the Project](#-installation--running-the-project)
 
 ---
 
-## ✨ Tính Năng
+## 🚀 Technologies Used
 
-| Tính năng                             | Mô tả                                                                 |
-|--------------------------------------|----------------------------------------------------------------------|
-| ✅ Xác thực & phân quyền             | Sử dụng JWT + Spring Security để xác thực & kiểm soát truy cập      |
-| ✅ Đăng ký & đăng nhập               | Cho phép người dùng tạo tài khoản và đăng nhập                      |
-| ✅ CRUD Phim                         | Quản lý thông tin phim: thêm, sửa, xoá, xem                         |
-| ✅ CRUD Rạp chiếu                    | Quản lý rạp chiếu                                                    |
-| ✅ CRUD Phòng chiếu                 | Tạo và cấu hình các phòng chiếu trong rạp                           |
-| ✅ CRUD Lịch chiếu                  | Lập lịch chiếu phim, gán phòng, thời gian,...                        |
-| ✅ CRUD Ghế ngồi                    | Quản lý sơ đồ ghế theo từng phòng                                    |
-| ✅ Đặt vé                            | Chọn ghế và tạo vé xem phim                                          |
-| ✅ Quản lý vé                        | Theo dõi lịch sử đặt vé, chi tiết vé                                 |
-| ✅ Upload ảnh với Cloudinary        | Quản lý ảnh phim, rạp, banner bằng Cloudinary                       |
-| ✅ Thiết kế RESTful API             | Chuẩn RESTful giúp frontend dễ tích hợp và phát triển               |
+| Technology                    | Purpose                                                                |
+|-------------------------------|------------------------------------------------------------------------|
+| **Java 17**                    | The main programming language                                           |
+| **Spring Boot**                | The core framework used to build the backend system                     |
+| **Spring Security + JWT**      | Authentication and authorization for users using JSON Web Token (JWT) |
+| **Spring Data JPA (Hibernate)**| ORM for managing data in relational databases                           |
+| **MySQL**                      | The main relational database                                           |
+| **Cloudinary API**             | Media storage and image processing (movie posters, banners)            |
+| **Docker**                     | Containerizing the application for easier deployment                   |
+| **AWS EC2**                    | Deployed the backend application on Amazon EC2 cloud environment       |
 
 ---
+
+## ✨ Features
+
+| Feature                          | Description                                                             |
+|-----------------------------------|-------------------------------------------------------------------------|
+| ✅ **Authentication & Authorization** | Utilizes JWT and Spring Security for user authentication and access control |
+| ✅ **Sign Up & Login**            | Allows users to create an account and log in                           |
+| ✅ **CRUD Movies**                | Manage movie information (Add, Edit, Delete, View)                     |
+| ✅ **CRUD Theaters**              | Manage theater information                                             |
+| ✅ **CRUD Rooms**                 | Manage rooms inside the theaters (Create and configure rooms)          |
+| ✅ **CRUD Showtimes**             | Manage movie showtimes, assign rooms and times                          |
+| ✅ **CRUD Seats**                 | Manage seat layouts for each room (Available and booked seats)         |
+| ✅ **Ticket Booking**             | Allows users to choose seats and create movie tickets                  |
+| ✅ **Ticket Management**          | Track ticket history and view ticket details                           |
+| ✅ **Upload Media with Cloudinary** | Manage movie, theater, and banner images using Cloudinary API          |
+| ✅ **RESTful API Design**         | Follows RESTful principles for easy frontend integration and expansion |
+
+---
+
+## 🔧 Installation & Running the Project
+
+### 1️⃣ Clone the Source
+```bash
+git clone https://github.com/ducminh1804/booking-ticket-backend.git
+cd booking-ticket-backend
+
